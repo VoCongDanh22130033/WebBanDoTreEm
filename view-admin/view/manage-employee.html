@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Nhân Viên</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../css/admin-css/navbar-left-top.css">
+    <link rel="stylesheet" href="../css/manage-admin.css">
+
+</head>
+
+<body>
+
+    <div class="container-scroller">
+        <!-- Navbar-Left -->
+        <navbar class="navbar-left" id="navbar-left">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <div class="sidebar-title">
+                        <a href="index.html" class="brand-logo-mini"><img src="../../images/logo.png" alt="logo"></a>
+                        <h2>Litte Whale</h2>
+                    </div>
+                    <img class="user-avatar"
+                        src="https://anhcute.net/wp-content/uploads/2024/09/Hinh-anh-chibi-Spiderman-sieu-dang-yeu.jpg"
+                        alt="User Image">
+                    <div class="user-info">
+                        <p class="user-name">AdminName</p>
+                        <p class="user-greeting">Chào mừng bạn trở lại</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a class="menu-link" href="phan-mem-ban-hang.html">
+                        <span class="menu-icon"><i class="fa fa-cart-plus"></i></span>
+                        <span class="menu-title">POS Bán Hàng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="./admin1.html">
+                        <span class="menu-icon"><i class="fa fa-tachometer-alt"></i></span>
+                        <span class="menu-title">Bảng điều khiển</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link active" href="./manage-employee.html">
+                        <span class="menu-icon"><i class="fa fa-id-card"></i></span>
+                        <span class="menu-title">Quản lý nhân viên</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="./manage-user.html">
+                        <span class="menu-icon"><i class="fa fa-users"></i></span>
+                        <span class="menu-title">Quản lý khách hàng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="./manage-product.html">
+                        <span class="menu-icon"><i class="fa fa-box"></i></span>
+                        <span class="menu-title">Quản lý sản phẩm</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="./manage-order.html">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="menu-title">Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="./report-revenue.html">
+                        <span class="menu-icon"><i class="fa fa-chart-bar"></i></span>
+                        <span class="menu-title">Báo cáo doanh thu</span>
+                    </a>
+                </li>
+            </ul>
+        </navbar>
+
+        <!-- MainContent -->
+        <div class="container-main">
+            <!-- Top Navbar -->
+            <nav class="navbar">
+                <div class="navbar-menu">
+                    <button class="navbar-toggler" id="navbar-toggle">
+                        <span class="navbar-icon">&#9776;</span>
+                    </button>
+                    <div class="search">
+                        <input type="text" placeholder="Search products">
+                    </div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="./add-employee.html" class="nav-link"><i class="fa-solid fa-plus"></i>Thêm sản phẩm
+                                mới</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link"><i class="fa-solid fa-message"></i> Tin Nhắn <span
+                                    class="badge">4</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link"><i class="fa-solid fa-bell"></i> Thông Báo <span
+                                    class="badge">3</span></a>
+                        </li>
+                    </ul>
+                    <div class="profile-container">
+                        <a href="#" class="profile-link">
+                            <img src="https://anhcute.net/wp-content/uploads/2024/09/Hinh-anh-chibi-Spiderman-sieu-dang-yeu.jpg"
+                                alt="Profile" class="profile-pic">
+                            <span class="profile-name">AdminName</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Container-Manage-Employee -->
+            <div class="container-management container-manage-employee">
+                <!-- Employee Management Table -->
+                <div class="container-management">
+                    <div class="header">
+                        <h2>Danh Sách Nhân Viên</h2>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="./add-employee.html" class="btn btn-add"><i class="fa-solid fa-plus"></i> Thêm nhân
+                            viên</a>
+                        <button class="btn btn-edits">Chỉnh nhiều dòng</button>
+                        <button class="btn btn-deletes">Xóa nhiều dòng</button>
+                    </div>
+
+                    <table id="employeeTable" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox"></th>
+                                <th>ID nhân viên</th>
+                                <th>Họ và tên</th>
+                                <th>Vai trò</th>
+                                <th>EmailEmail</th>
+                                <th>SĐT</th>
+                                <th>Ngày sinh</th>
+                                <th>Trạng thái</th>
+                                <th>Tính năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>#CD12837</td>
+                                <td>Hồ Thị Thanh Ngân</td>
+                                <td>Quản trị viên</td>
+                                <td>b@gmail.com</td>
+                                <td>0926737168</td>
+                                <td>12/02/1999</td>
+                                <td>Hoạt động</td>
+                                <td>
+                                    <button class="btn btn-trash"><i class="fas fa-trash-alt"></i></button>
+                                    <a href="./update-employee.html" class="btn btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+         
+
+
+            <!-- Model Confirm -->
+            <div id="confirmModal" class="modal-confirm">
+                <div class="modal-content">
+                    <h2>Cảnh báo</h2>
+                    <p>Bạn có chắc chắn là muốn xóa nhân viên này?</p>
+                    <button class="btn btn-cancel">Hủy bỏ</button>
+                    <button class="btn btn-confirm">Đồng ý</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="../js/modal-confirm.js"></script>
+    <script src="../js//modal-update.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#employeeTable').DataTable({
+                paging: true,
+                searching: true,
+                info: true,
+                lengthChange: true,
+                order: [[1, 'asc']],
+                columnDefs: [
+                    { orderable: false, targets: [0, 7] } // Vô hiệu hóa sắp xếp ở cột checkbox và tính năng
+                ],
+                language: {
+                    search: "Tìm kiếm:",
+                    lengthMenu: "Hiển thị _MENU_ dòng",
+                    info: "Hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+                    paginate: {
+                        first: "<i class='fas fa-angle-double-left'></i>",
+                        last: "<i class='fas fa-angle-double-right'></i>",
+                        next: "<i class='fas fa-angle-right'></i>",
+                        previous: "<i class='fas fa-angle-left'></i>"
+                    }
+                },
+                drawCallback: function () {
+                    // Đảm bảo phần tử pagination được căn chỉnh lại khi vẽ lại bảng
+                    $('.dataTables_paginate').addClass('custom-pagination');
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
